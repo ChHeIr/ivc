@@ -1,6 +1,8 @@
 #include "colors.inc"
 #include "screen.inc"
 #include "Bein.pov"
+#include "Becken.pov"
+
 // Die Figur guckt nach unten links
 // x1 geht nach hinten rechts
 // x2 nach oben
@@ -13,7 +15,7 @@ camera {
 
 plane{y, 0
 	pigment{
-		checker colour Yellow color Green
+		checker colour Black color Green
 		scale 20
 		}
 		finish {
@@ -27,8 +29,10 @@ light_source {
 }
 
 
-	#declare erstesBeinpaar = merge {object{Bein translate<0,0,0>}
+	#declare erstesBeinpaar = merge {
+	object{Bein translate<0,0,0>}
 	object{Bein translate<0,0,1>}
+	object{Becken translate<0,2,0>}
 	}
 	object{Bein translate<0,0,3>}
 	object{Bein translate<0,0,4>}

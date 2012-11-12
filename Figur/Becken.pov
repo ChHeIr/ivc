@@ -16,7 +16,7 @@ light_source {
 
 
 // Becken
-box {
+#declare Becken = box {
 	0,
 	<0.8, 0.2, 1.4>
 	pigment {
