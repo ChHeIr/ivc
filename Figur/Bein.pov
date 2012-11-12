@@ -15,7 +15,7 @@ light_source {
 }
 
 // Bein
-merge {
+#declare Bein = merge {
 	// Fuss
 	box {
 		0,
