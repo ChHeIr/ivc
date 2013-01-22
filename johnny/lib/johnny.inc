@@ -428,12 +428,20 @@ union {
 // DRAW MINIFIG
 object { fig_whole
   rotate <0,set_start_direction,0>
-  translate <set_start_x, move_jump, set_start_z>
+  translate <set_start_x, clock*move_jump, set_start_z>
+//#if (clock)
+//#end
+//translate <set_start_x, (-((clock-7)*(clock-7))* 0.1 + 6), set_start_z>
   translate <0,wankel_y,0>
   translate <attitude_corr_x, 0, attitude_corr_z>
   texture { red_tex } 
   }
   
+
+
+
+
+
 
 #end //end of Johnny macro
 

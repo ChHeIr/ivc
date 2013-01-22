@@ -7,19 +7,19 @@
 // Version: 0080
 
 //global_settings {
- // max_trace_level 8
+//  max_trace_level 8
 //  #if ( Quality < 4 )
-//  radiosity {
-//    brightness 3.3
-//    count 300
- //   distance_maximum 100  // was 170...
+ // radiosity {
+  //  brightness 3.3
+   // count 300
+    //distance_maximum 100  // was 170...
  //   error_bound 0.25
 //    gray_threshold 0.50
-//    low_error_factor 0.775
-//    minimum_reuse 0.015
+ //   low_error_factor 0.775
+ //   minimum_reuse 0.015
 //    nearest_count 8
-//    recursion_limit 1
-//  }
+  //  recursion_limit 1
+ // }
 //  #end
 //}
 
