@@ -29,7 +29,7 @@
 // SCENE
     #declare set_floor=0;                                   // 0:no floor, 1:floor       
     #declare set_floor_color=white;                         // Floor color e.g. white
-    #declare set_background_color= sky_color;                // Background color. e.g. sky_color or black
+    #declare set_background_color= black;                // Background color. e.g. sky_color or black
     #declare set_scenery_file="oben_scenery.inc"             // Filename of your scenery file, empty string no scenery
     #declare set_scenery_align=<0,0,0>;                     // Align scenery to Johnny's world                                                        
     #declare set_camera_nr=0;                               // 1:front, 2:side, 3:top, 4:angle, 0:custom
@@ -52,10 +52,10 @@
     #declare my_camera=camera {
     	        #if (set_camera_ortho) orthographic #end
         location  <30.0 , 100.0 , -120.0>
-        look_at   <20.0, 0.0, 100.0>
+        look_at   <0.0, 0.0, 00.0>
 //        rotate <10,-30,0>
         translate <0,0,0>
-        angle 45
+        angle 105
         }
 //        	#declare ASPECT = 4/3;
 //
@@ -157,15 +157,15 @@
 #if(on)                 //Toggle on/off to show/hide an actor
   johnny(
     "indi",    // caption (name) of the actor
- 	1, //face Expression 0 = standard 1 = indiana
-    1,                  // set_talk             0:rigid smiley, 1:talking mouth
+ 	2, //face Expression 0 = standard 1 = indiana
+    0,                  // set_talk             0:rigid smiley, 1:talking mouth
     0,                  // phase_shift          to walk out of pace to other walkers
     
     array [9] {         // -- BODY MOVEMENT
-        -1.0,            // move head            -2.o/+2.0 relative motion of head,              e.g. 0.5
+        0,            // move head            -2.o/+2.0 relative motion of head,              e.g. 0.5
         0,              // move torso           -2.o/+2.0 relative motion of torso,             e.g. 0.1
-        0,            // move arm left        -2.o/+2.0 relative motion of left arm,          e.g. 0.5
-        2,            // move arm right       -2.o/+2.0 relative motion of right arm,         e.g. 0.5
+        2,            // move arm left        -2.o/+2.0 relative motion of left arm,          e.g. 0.5
+        0,            // move arm right       -2.o/+2.0 relative motion of right arm,         e.g. 0.5
         0,              // move hand left       -2.o/+2.0 relative motion of left hamd,         e.g. 0.5
         0,              // move hand right      -2.o/+2.0 relative motion of right hand,        e.g. 0.5
         0,              // move gear left       -2.o/+2.0 relative motion of gear in left hand
@@ -178,7 +178,7 @@
         0               // move jump            0-6 relative motion of jumping up,              e.g. 0.5
         }
     array [8] {         // -- BODY POSE         as offset to movement
-        -30,              // pose head            start pose of head,      e.g. 20
+        0,              // pose head            start pose of head,      e.g. 20
         0,              // pose torso           start pose of torso,     e.g. 10
         0,              // pose arm left        start pose of left arm,  e.g. -20
         0,              // pose arm right       start pose of right arm, e.g. -20
@@ -191,7 +191,7 @@
         flesh_tex,     // head texture,       e.g. yellow_tex, flesh_tex, brown_tex
         flesh_tex,     // hands texture,
         grey2_tex,       // pants texture,
-        brown_tex,        // shirt texture,
+        brown_tex,        // shirt texure,
         brown_tex         // shirt arms texture,
         },                   
     "shirt_print_3.gif",  // shirtprint file, empty string for no print
@@ -204,22 +204,23 @@
     array [4] {         // -- GEAR
         "fedora",  // headwear/hair        filename, empty string for bald
         "neckgear_09",             // neck/backwear        filename, e.g. neckgear_01
-        "",  // hand tool left       filename, e.g. handgear_01
+        "handgear_16",  // hand tool left       filename, e.g. handgear_01
         "handgear_15"   // hand tool right      filename, e.g. handgear_01
         },                                  
     array [4]{          
         brown_tex,       // headwear/hair color              
         brown_tex,       // neck/backwear color       
-        brown_tex,       // hand gear left color            
+        gold_tex,       // hand gear left color            
         brown_tex        // hand gear right color           
         },   
-    array [5] {         // -- PATH
+    array [6] {         // -- PATH
         1               // move_fig              0:stay at spot, 1:move along
         10,              // start x,              fig walks on the x-z-plane (horizontal)   e.g. -50 or 0
         28,              // start z
-	 -180,              // start direction       direction in degrees from start           e.g. -20
-        0}              // curve direction       curvature in degrees per half step        e.g. 5
-        5
+	 0,              // start direction       direction in degrees from start           e.g. -20
+        0,
+		0}              // curve direction       curvature in degrees per half step        e.g. 5
+        0
 )
       
 //      object{kerze scale<100,100,100> }
@@ -245,15 +246,16 @@
 //      }
       
       
-      #declare  lichtlinks  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
+      #declare  lichtlinks  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  1.2,  // Candle_Intensity,  
+                  2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  5, // Fade_Distance, //  3 ~ 5    
-                  4 // Fade_Power //   2,3,4
-                 ) // -------------------------
-                 scale 7
+                  25, // Fade_Distance, //  3 ~ 5    
+                  10 // Fade_Power //   2,3,4
+                )
+
+               scale 7
         rotate 0
         
       }
@@ -261,15 +263,14 @@
 
 
 
-
-      #declare  lichtvornelinks  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
+      #declare  lichtvornelinks  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  1.2,  // Candle_Intensity,  
+                  2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  5, // Fade_Distance, //  3 ~ 5    
-                  4 // Fade_Power //   2,3,4
-                 ) // -------------------------
+                  25, // Fade_Distance, //  3 ~ 5    
+                  10 // Fade_Power //   2,3,4
+               ) // -------------------------
                  scale 7
         rotate 0
         
@@ -278,14 +279,14 @@
 
 
                                      
-                                     #declare  lichtrechts  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
+                                     #declare  lichtrechts  = object  {Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  1.2,  // Candle_Intensity,  
+                  2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  5, // Fade_Distance, //  3 ~ 5    
-                  4 // Fade_Power //   2,3,4
-                 ) // -------------------------
+                  25, // Fade_Distance, //  3 ~ 5    
+                  10 // Fade_Power //   2,3,4
+               ) // -------------------------
                  scale 7
         rotate 0
         
@@ -294,13 +295,13 @@
 
 
 
-                                   #declare  lichtvornerechts  = object  { Candle_2(2,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
+                                   #declare  lichtvornerechts  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  1.2,  // Candle_Intensity,  
+                  2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  5, // Fade_Distance, //  3 ~ 5    
-                  4 // Fade_Power //   2,3,4
+                  25, // Fade_Distance, //  3 ~ 5    
+                  10 // Fade_Power //   2,3,4
                  ) // -------------------------
                  scale 7
         rotate 0
@@ -316,13 +317,10 @@ object{lichtrechts translate <60,55,110>}
 object{lichtvornelinks translate <-88,10,-72>}
 object{lichtvornerechts translate <112,10,-68>}
 
-//fog{fog_type   1
-//    distance   80
-//    color      Grey
-//    fog_offset 0.1
-//    fog_alt    1.5
-//    turbulence 1.8
-//}   
+fog{fog_type   2
+    distance   80
+    color      Grey
+}   
 
 #end
 

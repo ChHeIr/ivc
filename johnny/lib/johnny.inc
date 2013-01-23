@@ -77,7 +77,7 @@
 
 #local set_move_fig=set_path [0];
 #local set_start_x=set_path [1];
-#local set_start_y=0;
+#local set_start_y=set_path [5];
 #local set_start_z=set_path [2];
 #local set_start_direction=set_path [3];
 #local set_curve_direction=set_path [4];
@@ -132,9 +132,9 @@
 #if(strlen(set_handgear_left)>0) 
   #include concat(gear_dir,set_handgear_left)  
   #local handgear_left= object { this_object texture { set_handgear_left_color }
-  scale <0.4,0.4,0.4>
+  scale <0.3,0.3,0.3>
   rotate <0,0,180>
-  translate <0,0,0> }
+  translate <10,0,0> }
 #end
 //Right hand accessory
 #if(strlen(set_handgear_right)>0) 
@@ -168,6 +168,22 @@ texture {
   translate <-0.5, -0.1, 0>
   scale <12, 12, 1>
 } 
+#end       
+
+
+ #if (face_expression = 2)
+ 
+#local head06_tex =
+texture {
+  material_map { gif concat(pics_dir,"mouth_astonished_indi_",mouth,".gif")  once interpolate 2
+       texture { black_tex }
+
+    texture { set_head_tex }
+  }
+  translate <-0.5, -0.1, 0>
+  scale <12, 12, 1>
+} 
+
 #else
 #local head06_tex = texture {
   material_map { gif concat(pics_dir,"mouth_",mouth,".gif") once interpolate 4
@@ -428,7 +444,8 @@ union {
 // DRAW MINIFIG
 object { fig_whole
   rotate <0,set_start_direction,0>
-  translate <set_start_x, clock*move_jump, set_start_z>
+  //  translate <set_start_x, clock*move_jump, set_start_z>
+  translate <set_start_x, set_start_y, set_start_z>
 //#if (clock)
 //#end
 //translate <set_start_x, (-((clock-7)*(clock-7))* 0.1 + 6), set_start_z>
@@ -528,6 +545,15 @@ background { set_background_color}
         #if (!set_shadows) shadowless #end
         }
 #break
+#case (2) //from up front 
+    light_source
+        {
+        0*x // light's position (translated below)
+        color red 1.0  green 1.0  blue 1.0  // light's color
+        translate <-100, 50, -100>
+        #if (!set_shadows) shadowless #end
+        }
+    #break
 #else   //custom
   light_source {my_light} //defined in characters include file
 #end
@@ -590,6 +616,16 @@ camera {
         translate <0,0,0>
        }
 #break       
+
+       #case (7) //SChräg oben hinten
+  camera {
+  	  #if (set_camera_ortho) orthographic #end
+  //#if (set_camera_follow) translate <set_start_x,0,posz> #end
+  location  <60.0 , 40.0 , -40.0>
+  look_at   <0.0, 20.0,  0.0>
+          angle 120
+  }
+#break   
 #else   //custom
   camera {my_camera} //defined in Walker settings include file
 #end
