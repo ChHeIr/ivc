@@ -1,0 +1,514 @@
+// Persistence of Vision RayTracer version 3.0 Scene description file
+// File: BASIC.LIB
+// Description: The basic library file, called from all model libraries
+// Date: 97/08/05
+// Author: Anton Raves
+//
+// Version: 0080
+
+//global_settings {
+ // max_trace_level 8
+//  #if ( Quality < 4 )
+//  radiosity {
+//    brightness 3.3
+//    count 300
+ //   distance_maximum 100  // was 170...
+ //   error_bound 0.25
+//    gray_threshold 0.50
+//    low_error_factor 0.775
+//    minimum_reuse 0.015
+//    nearest_count 8
+//    recursion_limit 1
+//  }
+//  #end
+//}
+
+// This part contains the textures needed for the LEGO(TM)-models. They have less reflection than the
+// older versions and the color values for the transparent textures have been changed, to make
+// them look more real. Also refraction- and ior-values have been changed, so that they are more
+// compatible to POV-Ray 3.0. All declaration names have been downcased, so no more capital
+// characters need to be used.
+
+// Declaration of the colors used
+// ------------------------------
+#declare black = color rgb <0.05, 0.05, 0.05>;
+#declare _blue = color rgb <0.1, 0.3, 1>;
+#declare _blue2 = color rgb <0.1, 0.2, 0.6>;
+#declare lt_blue = color rgb <0.3, 0.7, 1>;
+#declare t_blue = color rgb <0.2, 0.6, 0.9>;
+#declare brown = color rgb <0.4, 0.2, 0>;
+#declare brown2 = color rgb <0.7, 0.4, 0.2>;
+#declare chrome = color rgb <0.15, 0.15, 0.15>;
+#declare cyan = color rgb <0.5, 0.825, 1>;
+#declare t_cyan = color rgb <0.6, 0.925, 0.925>;
+#declare dark_grey = color rgb <0.1, 0.1, 0.1>;
+#declare _green = color rgb <0, 0.5, 0>;
+#declare _green2 = color rgb <0, 0.7, 0>;
+#declare t_green = color rgb <0, 1, 0>;
+#declare gold = color rgb <0.95, 0.85, 0>;
+#declare grey = color rgb <0.55, 0.55, 0.55>;
+#declare grey2 = color rgb <0.35, 0.35, 0.35>;
+#declare grey3 = color rgb <0.8, 0.8, 0.8>;
+#declare orange = color rgb <1, 0.5, 0.15>;
+#declare _red = color rgb <1, 0, 0>;
+#declare white = color rgb <1, 1, 1>;
+#declare yellow = color rgb <1, 0.9, 0>;
+#declare t_yellow = color rgb <1, 0.95, 0>;
+#declare yellowgreen = color rgb <0.6, 1, 0.15>;
+#declare t_yellowgreen = color rgb <0.9, 1, 0.45>;
+
+// Declaration of the finishes used
+// --------------------------------
+#declare lego_finish =
+finish { ambient 0.4 specular 1 roughness 0.005}   
+//was:
+//finish { ambient 0.4 specular 1 roughness 0.005 reflection .1 } 
+
+#declare silverish_finish =
+finish { ambient 0.4 specular 1 roughness 0.005 metallic brilliance 0.75 reflection 0.05 }
+
+#declare t_lego_finish =
+finish { ambient 0.6 specular 1 roughness 0.005 reflection .1 }
+
+//was:
+//finish { ambient 0.6 specular 1 roughness 0.005 reflection .1 refraction 1 ior 1.05 }                                       
+                                             
+                                             
+#declare bumping =
+normal { bumps 0.3 scale 0.05 }
+// This extra texture is used for bumping the sides of the slope-parts.
+
+// The textures themselves...
+// --------------------------
+#declare black_tex = texture { pigment { color black } finish { lego_finish } }
+#declare blue_tex = texture { pigment { color _blue } finish { lego_finish } }
+#declare blue2_tex = texture { pigment { color _blue2 } finish { lego_finish } }
+#declare brown_tex = texture { pigment { color brown } finish { lego_finish } }
+#declare brown2_tex = texture { pigment { color brown2 } finish { lego_finish } }
+#declare conductive_tex = texture { pigment { color grey } finish { silverish_finish reflection .1 } }
+#declare cyan_tex = texture { pigment { color cyan } finish { lego_finish } }
+#declare goldish_tex = texture { pigment { color gold } finish { silverish_finish } }
+#declare green_tex = texture { pigment { color _green } finish { lego_finish } }
+#declare green2_tex = texture { pigment { color _green2 } finish { lego_finish } }
+#declare grey_tex = texture { pigment { color grey } finish { lego_finish } }
+#declare grey2_tex = texture { pigment { color grey2 } finish { lego_finish } }
+#declare orange_tex = texture { pigment { color orange } finish { lego_finish } }
+#declare red_tex = texture { pigment { color _red } finish { lego_finish } }
+#declare silverish_tex = texture { pigment { color grey3 } finish { silverish_finish } }
+#declare white_tex = texture { pigment { color white } finish { lego_finish } }
+#declare yellow_tex = texture { pigment { color yellow } finish { lego_finish } }
+#declare yellowgreen_tex = texture { pigment { color yellowgreen } finish { lego_finish } }
+#declare blablub_tex = texture { pigment { color rgbt<1,1,1,1> } finish { lego_finish } }
+#declare blablub1_tex = texture { pigment { color transmit 1 }}
+
+
+// The transparent textures...
+// ---------------------------
+#declare t_blue_tex = texture { pigment { color t_blue filter 1 } finish { t_lego_finish } }
+#declare t_cyan_tex = texture { pigment { color t_cyan filter 1 } finish { t_lego_finish } }
+#declare t_green_tex = texture { pigment { color t_green filter 1 } finish { t_lego_finish } }
+#declare t_orange_tex = texture { pigment { color orange filter 0.85 } finish { t_lego_finish } }
+#declare t_red_tex = texture { pigment { color _red filter 1 } finish { t_lego_finish } }
+#declare t_yellow_tex = texture { pigment {	color t_yellow filter 1 } finish { t_lego_finish } }
+#declare t_yellowgreen_tex = texture { pigment { color t_yellowgreen filter 0.9 } finish { t_lego_finish } }
+#declare t_white_tex = texture { pigment { color white filter 1 } finish { t_lego_finish } }
+
+// And the other ones...
+// ---------------------
+#declare chrome_tex = texture { pigment { color chrome } finish { lego_finish metallic reflection 0.5 brilliance 6 } }
+#declare lt_blue_tex = texture { pigment { color lt_blue filter 0.05 } finish { lego_finish reflection 0 } }
+#declare r_black_tex = texture { pigment { color dark_grey } finish { lego_finish reflection .01 } }
+#declare r_brown_tex = texture { pigment { color brown } finish { lego_finish reflection .01 } }
+#declare r_white_tex = texture { pigment { color white } finish { lego_finish reflection .01 } }
+#declare r_yellow_tex = texture { pigment { color yellow } finish { lego_finish reflection .01 } }
+
+// Declaration of the regularly used parts.
+#declare bush_leaf_1 =
+difference {
+  merge {
+    cylinder { -1*y, 9*y, 1 }
+    sphere { <0, 9, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 11, 2> }
+  rotate -30*z
+  translate <8, 3.2, 0>
+}
+
+#declare bush_leaf_2 =
+difference {
+  merge {
+    cylinder { -1*y, 13*y, 1 }
+    sphere { <0, 13, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 15, 2> }
+  rotate -30*z
+  translate <8, 3.2, 0>
+}
+
+#declare bush_leaf_3 =
+difference {
+  merge {
+    cylinder { -1*y, 13*y, 1 }
+    sphere { <0, 13, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 15, 2> }
+  rotate -20*z
+  translate <8.8, 8, 0>
+}
+
+#declare bush_leaf_4 =
+difference {
+  merge {
+    cylinder { -1*y, 17*y, 1 }
+    sphere { <0, 17, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 19, 2> }
+  rotate -20*z
+  translate <8.8, 8, 0>
+}
+
+#declare bush_leaf_5 =
+difference {
+  merge {
+    cylinder { -1*y, 17*y, 1 }
+    sphere { <0, 17, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 19, 2> }
+  rotate -10*z
+  translate <7.3, 10.9, 0>
+}
+
+#declare bush_leaf_6 =
+difference {
+  merge {
+    cylinder { -1*y, 21*y, 1 }
+    sphere { <0, 21, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 23, 2> }
+  rotate -10*z
+  translate <7.3, 10.9, 0>
+}
+
+#declare bush_leaf_7 =
+difference {
+  merge {
+    cylinder { -1*y, 22.5*y, 1 }
+    sphere { <0, 22.5, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 24.5, 2> }
+  rotate -4*z
+  translate <5.8, 13.9, 0>
+}
+
+#declare bush_leaf_8 =
+difference {
+  merge {
+    cylinder { -1*y, 21*y, 1 }
+    sphere { <0, 21, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 23, 2> }
+  rotate -6*z
+  translate <5.8, 13.9, 0>
+}
+
+#declare bush_leaf_9 =
+difference {
+  merge {
+    cylinder { -1*y, 19*y, 1 }
+    sphere { <0, 19, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 21, 2> }
+  rotate -5*z
+  translate <5.8, 13.9, 0>
+}
+
+#declare bush_leaf_10 =
+difference {
+  merge {
+    cylinder { -1*y, 18*y, 1 }
+    sphere { <0, 18, 0> 1.000001 }
+  }
+  box { <0, -2, -2> <2, 20, 2> }
+  rotate -6*z
+  translate <5.8, 13.9, 0>
+}
+
+#declare button =
+cylinder { 2.89*y, 4.4*y, 2.25 }
+
+#declare conductive_button =
+merge {
+  difference {
+    cylinder { 2.89*y, 4.4*y, 2.25 }
+    box { <-1, 1, -3> <3, 4, 1> }
+    difference {
+      box { <-3, 2, -5> <3, 6, -0.75> }
+      cylinder { 3*y, 5*y, 1.75 }
+      rotate -45*y
+    }
+  }
+  intersection {
+    cylinder { 2.75*y, 3.9*y, 2.25 }
+    box { <-1, 1, -3> <3, 4, 1> }
+    texture { conductive_tex }
+  }
+}
+
+#declare crane_hole =
+difference {
+  cylinder { -2.85*z, 2.85*z, 3 }
+  cylinder {-3*z, 3*z, 2.25 }
+}
+
+#declare ext_crane_cutter_l =
+difference {
+  box { <0, 0.25, 0> <1.5, 8.1, 2> rotate 47*y }
+  box { <1.5, 0, -2> <2.5, 8.2, 2> }
+}
+
+#declare ext_crane_cutter_r =
+difference {
+  box { <0, 0.25, -2> <1.5, 8.1, 0> rotate -47*y }
+  box { <1.5, 0, -2> <2.5, 8.2, 2> }
+}
+
+#declare fence_part1 =
+merge {
+  box { <-0.3, -4.9, 1.400002> <0.3, 4.9, 3.899998> }
+  box { <-4.9, -0.3, 1.400003> <4.9, 0.3, 3.899997> }
+  rotate 45*z
+}
+
+#declare h_pin =
+cylinder { 0*y, 8.1*y, 1.5 }
+
+#declare h_ring =
+difference {
+  cylinder { 0*y, 8.1*y, 3 }
+  cylinder { -1*y, 9*y, 2.25 }
+}
+
+#declare hole =
+cylinder { 1*y, 4*y, 1.25 }
+
+#declare inside_seperator =
+difference {
+  box { <-13.000002, -0.5, -7.75> <-7.500002, 0.5, -2.9> }
+  box { <-10, -10, -10> <0, 10, 10> rotate -40*y translate <-9, 0, -9.75> }
+}
+
+#declare openbutton =
+difference {
+  cylinder { 2.89*y, 4.4*y, 2.25 }
+  cylinder { 2.8*y, 4.5*y, 1.55 }
+}
+
+#declare opencylinder =
+difference {
+  cylinder { 3*y, 10.4*y, 2.25 }
+  cylinder { 2*y, 11*y, 1.55 }
+}
+
+#declare pin =
+cylinder { 0*y, 2.1*y, 1.5 }
+
+#declare ring =
+difference {
+  cylinder { 0*y, 2.1*y, 3 }
+  cylinder { -1*y, 3*y, 2.25 }
+}
+
+#declare rosterpiece =
+difference {
+  box { <-3.1, 0, -3.1> <3.1, 2.9, 3.1> }
+  box { <-2.5, -1, -2.5> <2.5, 3, 2.5> }
+  rotate 45*y
+}
+
+#declare tech_insert =
+merge {
+  cylinder { -3.8*z, 3.8*z, 3.5 translate <0, 5.25, 0> }
+  cylinder { 0*y, 3*y, 1.5 }
+}
+
+#declare tooth1 =
+difference {
+  box { <-1.250001, 2.749999, -0.75> <0.250001, 7.25, 0.75> }
+  cone { -1.75*x, 5.75, 1.25*x, 8.75 inverse }
+}
+
+#declare tor =
+difference {
+  torus { 3, 1.5 rotate 90*x }
+  box { <-10, -10, -10> <10, -0.000001, 10> }
+  box { <-10, -10, -10> <-0.000001, 10, 10> }
+}
+
+// Declaration of cutting parts.
+#declare axel_cutter =
+difference {
+  box { <-2, 0, -4> <0, 2, 4> }
+  cylinder { 5*z, -5*z, 1 }
+}
+
+#declare axel_hole =
+difference {
+  merge {
+    box { <-0.9, -4, -2.25> <0.9, 4, 2.25> }
+    box { <-2.25, -4, -0.9> <2.25, 4, 0.9> }
+  }
+  cylinder { -5*y, 5*y, 2.25 inverse }
+}
+
+#declare cam_piece =
+merge {
+  cylinder { 0*y, 1.000001*y, 0.5 }
+  cylinder { 0*y, 1.000001*y, 0.5 translate <3, 0, 0 > }
+  box { <0, 0, -0.5> <3, 1, 0.5> }
+}
+
+#declare covercutter =
+difference {
+  box { <-8, -1, -13> <8, 4.5, -4> }
+  box { <-10, -10, -20> <0, 10, 0> rotate -45.5*z translate <-6.95, 0, 0> }
+  box { <0, -10, -20> <10, 10, 0> rotate 45.5*z translate <6.95, 0, 0> }
+  box { <-10, -10, 10> <10, 10, -4> rotate -10*x }
+}
+
+#declare covercutter2 =
+difference {
+  box { <-6.45, -1, -10.45> <6.45, 4.51, -4> }
+  box { <-10, -10, 10> <10, 10, -4.5> rotate -10*x }
+}
+
+#declare inside_cutter1 =
+difference {
+  box { <-8, -2, -14> <-1, 2, -7.75> }
+  box { <-10, -10, 0> <10, 10, 20> rotate -81*x translate <0, 2, -14> }
+  box { <-10, -10, 0> <10, 10, 20> rotate 81*x translate <0, -2, -14> }
+  box { <-9, -2, -9> <-5.5, 2, -5> }
+}
+
+#declare inside_cutter2 =
+difference {
+  box { <-5.5, -4, -14> <-1, 4, -7.75> }
+  box { <-10, -10, 0> <10, 10, 20> rotate -72*x translate <0, 4, -14> }
+  box { <-10, -10, 0> <10, 10, 20> rotate 72*x translate <0, -4, -14> }
+  cylinder { -6*x, -1*x, 14 inverse }
+  cylinder { -6*x, -1*x, 3 translate <0, 0, -8> }
+}
+
+#declare tail_s_cutter =
+difference {
+  box { <-2.5, -0.5, -0.5> <2.5, 3, 2.5> }
+  box { <-2, -1, 0> <0, 4, 3> rotate 28*y translate <-2.5, 0, 0> }
+  box { <0, -1, 0> <2, 4, 3> rotate -28*y translate <2.5, 0, 0> }
+}
+
+#declare tb =
+box { <-11, -0.6, -1> <-8.5, 0.6, 4> }
+
+#declare tc =
+box { <-11, -0.6, -6> <-8.5, 0.6, -1> }
+
+#declare td =
+box { <-11, -0.7, -3> <-8.5, 0.7, 4> }
+
+#declare te =
+box { <-11, -0.7, -10> <-8.5, 0.7, -3> }
+
+#declare tk =
+box { <-11, -0.6, -4> <-6, 0.6, 0> }
+
+#declare tl =
+box { <-11, -0.6, 0> <-6, 0.6, 4> }
+
+#declare tech_hole =
+merge {
+  cylinder { -6*z, 6*z, 2.25 translate <0, 5.25, 0> }
+  cylinder { -5*z, -3.4*z, 3 translate <0, 5.25, 0> }
+  cylinder { 3.4*z, 5*z, 3 translate <0, 5.25, 0> }
+}
+
+#declare window_cutter_b =
+difference {
+  box { <-20, -100, -6> <3.5, 100, 30> }
+  box { <0, -101, -0.4> <4, 101, 24.4> }
+  cylinder { -101*y, 101*y, 2 translate <3.5, 0, -0.400001> }
+  cylinder { -101*y, 101*y, 2 translate <3.5, 0, 24.400001> }
+}
+
+#declare window_cutter2 =
+difference {
+  box { <-15, -100, -6> <3.5, 100, 30> }
+  box { <0, -101, -0.4> <4, 101, 24.4> }
+  cylinder { -101*y, 101*y, 3.5 translate <3.5, 0, -0.400001> }
+  cylinder { -101*y, 101*y, 3.5 translate <3.5, 0, 24.400001> }
+}
+
+#declare wrench_cutter =
+difference {
+  cylinder { -2*z, 2*z, 8 }
+  torus { 8, 1.5 rotate 90*x }
+  box { <-20, -20, -20> <20, 0, 20> }
+  box { <-20, 0, -20> <20, 20, 20> rotate -70*z }
+}
+
+#declare wrench_cutter_2 =
+difference {
+  box { <-4, -10, -2> <0, 10, 2> }
+  cylinder { -3*z, 3*z, 2 scale <0.9, 2, 1> }
+}
+
+// Declaration of repeating parts.
+#declare button4 =
+union {
+  object { button }
+  object { button translate <8, 0, 0> }
+  object { button translate <16, 0, 0> }
+  object { button translate <24, 0, 0> }
+}
+
+#declare h_pin3 =
+union {
+  object { h_pin }
+  object { h_pin translate <8, 0, 0> }
+  object { h_pin translate <16, 0, 0> }
+}
+
+#declare h_ring3 =
+union {
+  object { h_ring }
+  object { h_ring translate <8, 0, 0> }
+  object { h_ring translate <16, 0, 0> }
+}
+
+#declare hole4 =
+union {
+  object { hole }
+  object { hole translate <8, 0, 0> }
+  object { hole translate <16, 0, 0> }
+  object { hole translate <24, 0, 0> }
+}
+
+#declare openbutton4 =
+union {
+  object { openbutton }
+  object { openbutton translate <8, 0, 0> }
+  object { openbutton translate <16, 0, 0> }
+  object { openbutton translate <24, 0, 0> }
+}
+
+#declare pin3 =
+union {
+  object { pin }
+  object { pin translate <8, 0, 0> }
+  object { pin translate <16, 0, 0> }
+}
+
+#declare ring3 =
+union {
+  object { ring }
+  object { ring translate <8, 0, 0> }
+  object { ring translate <16, 0, 0> }
+}
