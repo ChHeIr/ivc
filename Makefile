@@ -1,12 +1,5 @@
-HEIGHT=800
-WIDTH=800
+povray_dev:
+		        cd johnny && povray Library_Path=../lgeo/lg Width=900 Height=600 +V +IPatrolKopie.pov +Ooutput/output.png +P +SP4 +Q2 +kff2 +kf1 -P
 
-all:
-	povray +H${HEIGHT} +W${WIDTH} Figur/Bein.pov
-	povray +H${HEIGHT} +W${WIDTH} Figur/Becken.pov
-
-bein:
-	povray +H${HEIGHT} +W${WIDTH} Figur/Bein.pov
-
-becken:
-	povray +H${HEIGHT} +W${WIDTH} Figur/Becken.pov
+povray:
+		        cd johnny && povray Library_Path=../lgeo/lg Width=800 Height=600 +V +IPatrolKopie.pov +Ooutput/output.png +P +SP4 +Q9 +kff35 +kf1 -P +A0.3
