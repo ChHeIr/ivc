@@ -30,7 +30,7 @@
     #declare set_floor=0;                                   // 0:no floor, 1:floor       
     #declare set_floor_color=white;                         // Floor color e.g. white
     #declare set_background_color= sky_color;                // Background color. e.g. sky_color or black
-    #declare set_scenery_file="oben_scenery.inc"             // Filename of your scenery file, empty string no scenery
+    #declare set_scenery_file="unten_ohnekopf_scenery.inc"             // Filename of your scenery file, empty string no scenery
     #declare set_scenery_align=<0,0,0>;                     // Align scenery to Johnny's world                                                        
     #declare set_camera_nr=0;                               // 1:front, 2:side, 3:top, 4:angle, 0:custom
     #declare set_camera_ortho=1;                            // 0:normal, 1:orthogonal (no perspective)
