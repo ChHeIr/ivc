@@ -77,10 +77,11 @@
 
 #local set_move_fig=set_path [0];
 #local set_start_x=set_path [1];
-#local set_start_y=0;
+#local set_start_y=set_path [5];
 #local set_start_z=set_path [2];
 #local set_start_direction=set_path [3];
 #local set_curve_direction=set_path [4];
+
 
 #local set_move_sideways=set_move_gait_factors [0];
 #local set_move_attitude=set_move_gait_factors [1];
@@ -428,7 +429,7 @@ union {
 // DRAW MINIFIG
 object { fig_whole
   rotate <0,set_start_direction,0>
-  translate <set_start_x, move_jump, set_start_z>
+  translate <set_start_x, set_start_y + move_jump, set_start_z>
   translate <0,wankel_y,0>
   translate <attitude_corr_x, 0, attitude_corr_z>
   texture { red_tex } 
@@ -560,6 +561,7 @@ camera {
   //#if (set_camera_follow) translate <set_start_x,0,posz> #end
   location  <60.0 , 40.0 , -40.0>
   look_at   <0.0, 20.0,  0.0>
+        
   }
 #break
 #case (5) //front portrait 3:4 aspect ratio width to height
@@ -581,6 +583,16 @@ camera {
         look_at   <50,  25.0, 35.0>
         translate <0,0,0>
        }
+       
+       
+       #case (7) //SChräg oben hinten
+  camera {
+  	  #if (set_camera_ortho) orthographic #end
+  //#if (set_camera_follow) translate <set_start_x,0,posz> #end
+  location  <60.0 , 40.0 , -40.0>
+  look_at   <0.0, 20.0,  0.0>
+          angle 120
+  }
 #break       
 #else   //custom
   camera {my_camera} //defined in Walker settings include file
