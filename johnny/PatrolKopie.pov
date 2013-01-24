@@ -1,3 +1,4 @@
+
 // ----------------------------------------------------------------------------------------
 // JOHNNY WALKER ANIMATION SETUP FILE
 // ----------------------------------------------------------------------------------------
@@ -13,8 +14,8 @@
 // ----------------------------------------------------------------------------------------
 // INCLUDE - Do not change these
 // ----------------------------------------------------------------------------------------
-    #include "colors.inc"	                                // General POV color definitions
-    #include "textures.inc"	                                // General POV Texture definitions
+    #include "colors.inc"                                 // General POV color definitions
+    #include "textures.inc"                                 // General POV Texture definitions
     #include "Candle_2.inc"
     #declare Quality=1;                                     // Quality for basic.lib
     #include concat (lib_dir,"basic.lib")                   // Basic.lib by Anton raves
@@ -50,22 +51,22 @@
 // Use this to store a customized camera for this scene.
 // Invoke this camera by setting camera_nr to 0. 
     #declare my_camera=camera {
-    	        #if (set_camera_ortho) orthographic #end
-        location  <30.0 , 100.0 , -120.0>
-        look_at   <20.0, 0.0, 100.0>
+              #if (set_camera_ortho) orthographic #end
+        location  <5.0 , 40.0 , -120.0>
+        look_at   <10.0, 30.0, 100.0>
 //        rotate <10,-30,0>
         translate <0,0,0>
-        angle 45
+        angle 30
         }
-//        	#declare ASPECT = 4/3;
+//          #declare ASPECT = 4/3;
 //
 //            #declare my_camera=camera {
-//    	        #if (set_camera_ortho) orthographic #end
+//              #if (set_camera_ortho) orthographic #end
 //    location < 12.706711,-136.643448,-293.257538 >
-//	sky < -0.01472214945363819853,-0.96647581425085427043,0.25633524686162983963 >
-//	right ASPECT * < -1,0,0 >
-//	look_at < 21.2815891948857505156,-53.78968557044494502861,19.62359195162906644327 >
-//	angle 80.4466
+//  sky < -0.01472214945363819853,-0.96647581425085427043,0.25633524686162983963 >
+//  right ASPECT * < -1,0,0 >
+//  look_at < 21.2815891948857505156,-53.78968557044494502861,19.62359195162906644327 >
+//  angle 80.4466
 //        }
        
 // Use this to store a customized light for this scene.
@@ -88,7 +89,7 @@
 //#if(on)                 //Toggle on/off to show/hide an actor
 //johnny(
 //    "Kumpane",    // caption (name) of the actor
-//     	0, //face Expression 0 = indiana
+//      0, //face Expression 0 = indiana
 //    0,                  // set_talk             0:rigid smiley, 1:talking mouth
 //    0,                  // phase_shift          to walk out of pace to other walkers
 //    
@@ -157,7 +158,7 @@
 #if(on)                 //Toggle on/off to show/hide an actor
   johnny(
     "indi",    // caption (name) of the actor
- 	1, //face Expression 0 = standard 1 = indiana
+  1, //face Expression 0 = standard 1 = indiana
     1,                  // set_talk             0:rigid smiley, 1:talking mouth
     0,                  // phase_shift          to walk out of pace to other walkers
     
@@ -178,7 +179,7 @@
         0               // move jump            0-6 relative motion of jumping up,              e.g. 0.5
         }
     array [8] {         // -- BODY POSE         as offset to movement
-        0,              // pose head            start pose of head,      e.g. 20
+        -30,              // pose head            start pose of head,      e.g. 20
         0,              // pose torso           start pose of torso,     e.g. 10
         0,              // pose arm left        start pose of left arm,  e.g. -20
         0,              // pose arm right       start pose of right arm, e.g. -20
@@ -216,10 +217,10 @@
     array [6] {         // -- PATH
         1               // move_fig              0:stay at spot, 1:move along
         15,             // start x,              fig walks on the x-z-plane (horizontal)   e.g. -50 or 0
-        93,              // start z
-	       0,              // start direction       direction in degrees from start           e.g. -20
+        40,              // start z
+         0,              // start direction       direction in degrees from start           e.g. -20
         0,
-	     44}              // curve direction       curvature in degrees per half step        e.g. 5
+       5}              // curve direction       curvature in degrees per half step        e.g. 5
         -5
 )
       
@@ -229,14 +230,14 @@
 //    ttf "SFFedora.ttf" "Bricking Jones" 3, 0
 //    texture{
 //     pigment{
-     	
-//     	gradient <0,1,0>
+      
+//      gradient <0,1,0>
 //color_map {[0.0 Yellow] // White
 //           [0.5 Orange] // red wine
 //           [1.0 Red] // White
 //          } // end of color_map
-//     	
-//     	}
+//      
+//      }
 //     finish{ambient 0.15
 //            diffuse 0.85}
 //   }
@@ -246,16 +247,15 @@
 //      }
       
       
-      #declare  lichtlinks  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
+      #declare  lichtlinks  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  2,  // Candle_Intensity,  
+                  1.2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  25, // Fade_Distance, //  3 ~ 5    
-                  10 // Fade_Power //   2,3,4
-                )
-
-               scale 7
+                  5, // Fade_Distance, //  3 ~ 5    
+                  4 // Fade_Power //   2,3,4
+                 ) // -------------------------
+                 scale 7
         rotate 0
         
       }
@@ -263,14 +263,15 @@
 
 
 
-      #declare  lichtvornelinks  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
+
+      #declare  lichtvornelinks  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  2,  // Candle_Intensity,  
+                  1.2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  25, // Fade_Distance, //  3 ~ 5    
-                  10 // Fade_Power //   2,3,4
-               ) // -------------------------
+                  5, // Fade_Distance, //  3 ~ 5    
+                  4 // Fade_Power //   2,3,4
+                 ) // -------------------------
                  scale 7
         rotate 0
         
@@ -279,14 +280,14 @@
 
 
                                      
-                                     #declare  lichtrechts  = object  {Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
+                                     #declare  lichtrechts  = object  { Candle_2( 2,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  2,  // Candle_Intensity,  
+                  1.2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  25, // Fade_Distance, //  3 ~ 5    
-                  10 // Fade_Power //   2,3,4
-               ) // -------------------------
+                  5, // Fade_Distance, //  3 ~ 5    
+                  4 // Fade_Power //   2,3,4
+                 ) // -------------------------
                  scale 7
         rotate 0
         
@@ -295,13 +296,13 @@
 
 
 
-                                   #declare  lichtvornerechts  = object  { Candle_2(10,  // Shining_On, 0= off, >0 = intensity of candle light 
-                  1, // Flame_Shadow, // >0 = intensity ; 0 = off
+                                   #declare  lichtvornerechts  = object  { Candle_2(2,  // Shining_On, 0= off, >0 = intensity of candle light 
+                  0.5, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
-                  2,  // Candle_Intensity,  
+                  1.2,  // Candle_Intensity,  
                   0.7   // Candle_Flame_Scale
-                  25, // Fade_Distance, //  3 ~ 5    
-                  10 // Fade_Power //   2,3,4
+                  5, // Fade_Distance, //  3 ~ 5    
+                  4 // Fade_Power //   2,3,4
                  ) // -------------------------
                  scale 7
         rotate 0
