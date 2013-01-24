@@ -30,10 +30,10 @@
     #declare set_floor=0;                                   // 0:no floor, 1:floor       
     #declare set_floor_color=white;                         // Floor color e.g. white
     #declare set_background_color= sky_color;                // Background color. e.g. sky_color or black
-    #declare set_scenery_file="oben_scenery.inc"             // Filename of your scenery file, empty string no scenery
+    #declare set_scenery_file="scenery_03.inc"             // Filename of your scenery file, empty string no scenery
     #declare set_scenery_align=<0,0,0>;                     // Align scenery to Johnny's world                                                        
-    #declare set_camera_nr=0;                               // 1:front, 2:side, 3:top, 4:angle, 0:custom
-    #declare set_camera_ortho=0;                            // 0:normal, 1:orthogonal (no perspective)
+    #declare set_camera_nr=3;                               // 1:front, 2:side, 3:top, 4:angle, 0:custom
+    #declare set_camera_ortho=1;                            // 0:normal, 1:orthogonal (no perspective)
     #declare set_camera_follow=0;                           // 0:static camera, 1:camera moves with fig
     #declare set_light_nr=0;                                // 1:two lights up front, 0:custom
     #declare set_light_ambient= rgb <0.5,0.5,0.5>;          // Ambient light
@@ -55,7 +55,7 @@
         look_at   <20.0, 0.0, 100.0>
 //        rotate <10,-30,0>
         translate <0,0,0>
-        angle 75
+        angle 45
         }
 //        	#declare ASPECT = 4/3;
 //
@@ -222,28 +222,29 @@
 )
       
 //      object{kerze scale<100,100,100> }
-    
-                 text {
-    ttf "SFFedora.ttf" "Indiana Jones" 1, 0
-    texture{
-     pigment{
-     	
-     	gradient <0,1,0>
-color_map {[0.0 Yellow] // White
-           [0.5 Orange] // red wine
-           [1.0 Red] // White
-          } // end of color_map
-     	
-     	}
-     finish{ambient 0.15
-            diffuse 0.85}
-   }
-      translate<-1,8,-3>
-      scale<12,12,12>
-      }
+
+//      
+//                 text {
+//    ttf "SFFedora.ttf" "Indiana Jones" 1, 0
+//    texture{
+//     pigment{
+//     	
+//     	gradient <0,1,0>
+//color_map {[0.0 Yellow] // White
+//           [0.5 Orange] // red wine
+//           [1.0 Red] // White
+//          } // end of color_map
+//     	
+//     	}
+//     finish{ambient 0.15
+//            diffuse 0.85}
+//   }
+//      translate<-3,8,-3>
+//      scale<12,12,12>
+//      }
+//      
       
-      
-      #declare  lichtlinks  = object  { Candle_2( 0.9,  // Shining_On, 0= off, >0 = intensity of candle light 
+      #declare  licht  = object  { Candle_2( 0.9,  // Shining_On, 0= off, >0 = intensity of candle light 
                   0, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
                   1.2,  // Candle_Intensity,  
@@ -255,8 +256,13 @@ color_map {[0.0 Yellow] // White
         rotate 0
         
       }
-                                     
-                                     #declare  lichtrechts  = object  { Candle_2( 0.9,  // Shining_On, 0= off, >0 = intensity of candle light 
+
+object{licht translate <-3,30,22>}
+
+
+#end
+
+               #declare  lichtrechts  = object  { Candle_2( 0.9,  // Shining_On, 0= off, >0 = intensity of candle light 
                   0, // Flame_Shadow, // >0 = intensity ; 0 = off
                   1.0,  // Candle_Height, relative to diameter (d=1) 
                   1.2,  // Candle_Intensity,  

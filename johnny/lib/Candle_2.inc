@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------------------------
 #ifndef( Candle_2_Inc_Temp)
 #declare Candle_2_Inc_Temp = version;
-#version 3.6;
+#version 3.7;
 
 #ifndef(  Shapes_Inc_Temp)
 #include "shapes.inc"

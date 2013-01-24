@@ -1439,12 +1439,12 @@ union {
 		matrix <1,0,-0,0,1,0,0,0,1,0,0,0>
 		#if (version >= 3.1) material #else texture #end { LDXColor6 }
 	}
-#if (LDXRefls = 0)
-	no_reflection
-#end
-#if (LDXShads = 0)
-	no_shadow
-#end
+//#if (LDXRefls = 0)
+//	no_reflection
+//#end
+//#if (LDXShads = 0)
+//	no_shadow
+//#end
 }
 
 
