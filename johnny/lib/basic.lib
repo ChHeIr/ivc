@@ -512,3 +512,6 @@ union {
   object { ring translate <8, 0, 0> }
   object { ring translate <16, 0, 0> }
 }
+
+#declare gold_tex = texture { pigment { color gold } finish { lego_finish metallic reflection 0.5 brilliance 6 } }
+

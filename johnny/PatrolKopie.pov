@@ -205,13 +205,13 @@
     array [4] {         // -- GEAR
         "fedora",  // headwear/hair        filename, empty string for bald
         "neckgear_09",             // neck/backwear        filename, e.g. neckgear_01
-        "",  // hand tool left       filename, e.g. handgear_01
+        "handgear_16",  // hand tool left       filename, e.g. handgear_01
         "handgear_15"   // hand tool right      filename, e.g. handgear_01
         },                                  
     array [4]{          
         brown_tex,       // headwear/hair color              
         brown_tex,       // neck/backwear color       
-        brown_tex,       // hand gear left color            
+        gold_tex,       // hand gear left color            
         brown_tex        // hand gear right color           
         },   
     array [6] {         // -- PATH
